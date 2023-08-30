@@ -30,14 +30,12 @@ if(response_currencies.status_code == 200):
 
     # Casteamos el JSON a un dict
     currencies = response_currencies.json()
-    print(currencies)
 
     # Cast de fechas a formato dd/m/yyyy
     date = cast_date(currencies["date"])
     
     # Conectamos a la BD
     conexion, cursor_db = conectar()
-    print(conexion)
 
     # Elegimos 10 cryptos de interés arbitrario
     top_10_crypto = ["btc", "bnb", "eth", "luna", "trx", "cake", "xrp", "matic", "doge", "leo"]
