@@ -26,6 +26,17 @@ def conectar():
     except:
         return False, False
 
+def crear_tabla(cursor_db, conn):
+    create_query = """
+    CREATE TABLE IF NOT EXISTS benjaluengoa_coderhouse.criptomonedas (
+	nombre varchar(256) NOT NULL,
+	fecha date NOT NULL,
+	precio_unitario decimal(38, 10) NOT NULL,
+	precio_relativo decimal(38, 10) NOT NULL, 
+    primary key(nombre));
+    """
+    cursor_db.execute(create_query)
+    conn.commit()
     
 def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
     insert_query = """

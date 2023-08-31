@@ -1,7 +1,6 @@
 from datetime import datetime
 import requests
 from conexion_db import *
-import decimal
 
 # Autor: Benjamin Luengo Ackermann
 
@@ -43,12 +42,15 @@ if(response_currencies.status_code == 200):
     if(conexion):            
         # A la hora de insertar en la tabla, se le podria aplicar tecnicas de compresión como RLE al campo fecha para no tener el valor repetido n veces.
         # Teniendo en cuenta que en una BD Relacional la tabla tendria por columnas 
-            # nombre (unique)
-            # fecha
-            # precio_unitario --> cuanto vale en dólares una unidad de la criptomoneda (e.g: 1 BTC = 26010 USD)
-            # precio_relativo --> cuanto vale en la criptomoneda correspondiente una unidad de dolar (e.g: 1 USD = 0.00003845 BTC)  
+            # nombre (unique) (varchar(256))
+            # fecha (date)
+            # precio_unitario (decimal(38, 10)) --> cuanto vale en dólares una unidad de la criptomoneda (e.g: 1 BTC = 26010 USD)
+            # precio_relativo (numeric(38, 10)) --> cuanto vale en la criptomoneda correspondiente una unidad de dolar (e.g: 1 USD = 0.00003845 BTC)  
         # En base a estas columnas y recordando que una BD Columnar consiste en pivotear la tabla relacional 
         # se obtendrán como filas el nombre, fecha, precio_unitario y precio_relativo
+        
+        # Crea la tabla si no existe
+        crear_tabla(cursor_db=cursor_db, conn=conexion)
 
         for crypto in top_10_crypto:
             insertar_registro(
@@ -56,8 +58,8 @@ if(response_currencies.status_code == 200):
                 conn=conexion,
                 nombre=crypto,
                 fecha=currencies["date"],
-                precio_relativo=decimal.Decimal(currencies["usd"][crypto]),
-                precio_unitario=decimal.Decimal(1)/decimal.Decimal(currencies["usd"][crypto]))
+                precio_relativo=float(round(float(currencies["usd"][crypto]), 8)),
+                precio_unitario=float(round(1/float(currencies["usd"][crypto]), 8)))
 
 
 # En caso de no poder conectarnos con la API
