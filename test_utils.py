@@ -15,6 +15,7 @@ def input_corte():
     
     return corte
 
+
 def print_listado(currencies, date, corte):
         print("\nListado Crypto - {}".format(date))
         cont = 0

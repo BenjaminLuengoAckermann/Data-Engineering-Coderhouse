@@ -1,5 +1,6 @@
 import psycopg2
 
+
 def conectar():
     host = "data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com"
     port = "5439"
@@ -24,7 +25,9 @@ def conectar():
         return conn, cursor_db
     
     except:
+        # En caso de no poder conectarse
         return False, False
+
 
 def crear_tabla(cursor_db, conn):
     create_query = """
@@ -38,6 +41,7 @@ def crear_tabla(cursor_db, conn):
     cursor_db.execute(create_query)
     conn.commit()
     
+
 def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
     insert_query = """
     INSERT INTO criptomonedas (nombre, fecha, precio_unitario, precio_relativo)
