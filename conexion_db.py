@@ -1,12 +1,13 @@
 import psycopg2
+import config
 
 
 def conectar():
-    host = "data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com"
-    port = "5439"
-    dbname = "data-engineer-database"
-    user = "benjaluengoa_coderhouse"
-    password = ""
+    host = config.host
+    port = config.port
+    dbname = config.dbname
+    user = config.user
+    password = config.password
 
     # Conectarse al cluster de Redshift
     try: 
