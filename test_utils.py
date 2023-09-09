@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 # Funcion para definir la cantidad de cryptos a mostrar
 def input_corte():
     input_valido = False
@@ -31,3 +34,15 @@ def print_listado(currencies, date, corte):
                 + " = " + str(1/currencies["usd"][crypto]) + " USD")
             if(corte > 0 and cont == corte):
                 break
+
+
+# Funcion para castear fechas
+def cast_date(date):
+    if(date):
+        date_str = date
+        date_format = "%Y-%m-%d"
+        date = datetime.strptime(date_str, date_format)
+        date = str(date.year) + "/" + str(date.month) + "/" + str(date.day)
+        return date
+    else: 
+        return None

@@ -1,6 +1,11 @@
 import psycopg2
 import config
 
+NOMBRE = "nombre varchar(256) NOT NULL"
+FECHA = "fecha date NOT NULL"
+PRECIO_UNITARIO = "precio_unitario decimal(38, 10) NOT NULL"
+PRECIO_RELATIVO = "precio_relativo decimal(38, 10) NOT NULL"
+PRIMARY_KEY = "primary key(nombre, fecha)"
 
 def conectar():
     host = config.host
@@ -37,17 +42,45 @@ def crear_tabla(cursor_db, conn):
 	fecha date NOT NULL,
 	precio_unitario decimal(38, 10) NOT NULL,
 	precio_relativo decimal(38, 10) NOT NULL, 
-    primary key(nombre));
+    primary key(nombre, fecha));
     """
     cursor_db.execute(create_query)
     conn.commit()
     
 
-def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
-    insert_query = """
-    INSERT INTO criptomonedas (nombre, fecha, precio_unitario, precio_relativo)
-    VALUES (%s, %s, %s, %s);
-    """
+def crear_tabla_staging(cursor_db, conn):
+    # Creamos tabla de staging
+    staging_table = "CREATE TABLE staging_criptomonedas as (SELECT * FROM criptomonedas WHERE 0 = 1);"
+    cursor_db.execute(staging_table)
+    conn.commit()
 
-    cursor_db.execute(insert_query, (nombre, fecha, precio_unitario, precio_relativo))
+
+def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
+    # Se insertan los registros en la tabla temporal o de staging
+    insert_query = '''
+        INSERT INTO staging_criptomonedas (nombre, fecha, precio_unitario, precio_relativo)
+        VALUES (%s, %s, %s, %s);
+    '''
+    cursor_db.execute(insert_query, (str(nombre), fecha, precio_unitario, precio_relativo))
+    conn.commit()
+
+    
+def upsert_criptomonedas(cursor_db, conn):
+    # Se eliminan los duplicados en la tabla de criptomonedas para posteriormente insertar los valores actualizados
+    delete_duplicates = """
+    DELETE FROM criptomonedas 
+    USING staging_criptomonedas
+    WHERE criptomonedas.fecha = staging_criptomonedas.fecha AND criptomonedas.nombre = staging_criptomonedas.nombre;
+    """
+    cursor_db.execute(delete_duplicates)
+    conn.commit()
+
+    # Se insertan los valores actualizados
+    upsert_query = "INSERT INTO criptomonedas SELECT * FROM staging_criptomonedas;"
+    cursor_db.execute(upsert_query)
+    conn.commit()
+
+    # Finalmente, se elimina la tabla de staging
+    drop_staging = "DROP TABLE staging_criptomonedas;"
+    cursor_db.execute(drop_staging)
     conn.commit()
