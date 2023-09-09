@@ -1,8 +1,8 @@
 import requests
+import pandas as pd
 # Se llaman unicamente a las funciones necesarias en los imports de módulos propios
 from conexion_db import conectar, crear_tabla, insertar_registro, crear_tabla_staging, upsert_criptomonedas
 from test_utils import cast_date
-import pandas as pd
 
 # Autor: Benjamin Luengo Ackermann
 

@@ -1,11 +1,6 @@
 import psycopg2
 import config
 
-NOMBRE = "nombre varchar(256) NOT NULL"
-FECHA = "fecha date NOT NULL"
-PRECIO_UNITARIO = "precio_unitario decimal(38, 10) NOT NULL"
-PRECIO_RELATIVO = "precio_relativo decimal(38, 10) NOT NULL"
-PRIMARY_KEY = "primary key(nombre, fecha)"
 
 def conectar():
     host = config.host
