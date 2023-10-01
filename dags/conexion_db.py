@@ -50,6 +50,14 @@ def crear_tabla_staging(cursor_db, conn):
     conn.commit()
 
 
+def eliminar_tabla_staging(cursor_db, conn):
+    # Eliminamos tabla de staging si existe
+    staging_table = "DROP TABLE IF EXISTS staging_criptomonedas;"
+    cursor_db.execute(staging_table)
+    conn.commit()
+
+
+
 def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
     # Se insertan los registros en la tabla temporal o de staging
     insert_query = '''
@@ -76,6 +84,4 @@ def upsert_criptomonedas(cursor_db, conn):
     conn.commit()
 
     # Finalmente, se elimina la tabla de staging
-    drop_staging = "DROP TABLE staging_criptomonedas;"
-    cursor_db.execute(drop_staging)
-    conn.commit()
+    eliminar_tabla_staging(cursor_db=cursor_db, conn=conn)
