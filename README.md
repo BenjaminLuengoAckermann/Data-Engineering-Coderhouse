@@ -40,7 +40,7 @@ Partiendo de esa base, se deben seguir los siguientes pasos para correr el progr
 3. En la terminal, usar el comando ```docker-compose up airflow-init```
 4. Ejecutar el comando ```docker-compose up```. Esto levantará el cliente web de Airflow donde podremos ver la ejecución de la tarea
 5. Dentro del navegador ir al [localhost](http://localhost:8080) e introducir las siguientes credenciales:
-       - *Username:* Benjamin
-       - *Password*: Luengo
+    - *Username:* Benjamin
+    - *Password*: Luengo
 6. Ya en el cliente de Airflow se puede ver que el DAG estará listado y corriendo una vez por día
 
