@@ -9,7 +9,9 @@
 
     Se puede pensar este script como uno que se corre diariamente dentro de una organización a fin de obtener las cotizaciones y almacenarlas con el objetivo de lograr consultas que agreguen valor a la compañia en una linea  temporal histórica desde el primer día de puesta en marcha del script hasta la actualidad.
 
+
 ### :globe_with_meridians: Repositorio API: https://github.com/fawazahmed0/currency-api#readme
+
 
 ### :floppy_disk: Base de Datos
 A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla tendria por columnas:
@@ -24,6 +26,7 @@ A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla ten
 [^1]: Cuanto vale en dólares una unidad de la criptomoneda **(e.g: 1 BTC = 26010 USD)**
 [^2]: Cuanto vale en la criptomoneda correspondiente una unidad de dolar **(e.g: 1 USD = 0.00003845 BTC)** 
 
+
 ### :golfing: ¿Como correr el container?
 Para correr el container, en primer lugar, debemos tener instalado:
 
@@ -32,12 +35,12 @@ Para correr el container, en primer lugar, debemos tener instalado:
 
 Partiendo de esa base, se deben seguir los siguientes pasos para correr el programa:
 
-> 1. Descargar en modo comprimido o clonar el repositorio
-> 2. Abrir una terminal dentro del proyecto (*Data-Engineering-Coderhouse*)
-> 3. En la terminal, usar el comando ```docker-compose up airflow-init```
-> 4. Ejecutar el comando ```docker-compose up```. Esto levantará el cliente web de Airflow donde podremos ver la ejecución de la tarea
-> 5. Dentro del navegador ir al [localhost](http://localhost:8080) e introducir las siguientes credenciales:
->   - *Username:* Benjamin
->   - *Password*: Luengo
-> 6. Ya en el cliente de Airflow se puede ver que el DAG estará listado y corriendo una vez por día
+1. Descargar en modo comprimido o clonar el repositorio
+2. Abrir una terminal dentro del proyecto (*Data-Engineering-Coderhouse*)
+3. En la terminal, usar el comando ```docker-compose up airflow-init```
+4. Ejecutar el comando ```docker-compose up```. Esto levantará el cliente web de Airflow donde podremos ver la ejecución de la tarea
+5. Dentro del navegador ir al [localhost](http://localhost:8080) e introducir las siguientes credenciales:
+       - *Username:* Benjamin
+       - *Password*: Luengo
+6. Ya en el cliente de Airflow se puede ver que el DAG estará listado y corriendo una vez por día
 
