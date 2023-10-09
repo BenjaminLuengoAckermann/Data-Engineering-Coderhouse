@@ -3,11 +3,11 @@ import config
 
 
 def conectar():
-    host = config.host
-    port = config.port
-    dbname = config.dbname
-    user = config.user
-    password = config.password
+    host = config.HOST
+    port = config.PORT
+    dbname = config.DBNAME
+    user = config.USER
+    password = config.PASSWORD
 
     # Conectarse al cluster de Redshift
     try: 
