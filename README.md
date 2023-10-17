@@ -44,3 +44,8 @@ Partiendo de esa base, se deben seguir los siguientes pasos para correr el progr
     - *Password*: Luengo
 6. Ya en el cliente de Airflow se puede ver que el DAG estará listado y corriendo una vez por día
 
+
+### :incoming_envelope: Envío de Alertas
+El envío de alertas se puede modificar cambiando los valores de treshold presentes en la función ```get_tresholds_for_top_10_crypto``` del [Módulo Alertas](plugins/alertas.py). 
+Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los pasos anteriores y serán enviadas a los correos especificados como variables de entorno en el archivo [docker-dompose](docker-compose.yaml)
+

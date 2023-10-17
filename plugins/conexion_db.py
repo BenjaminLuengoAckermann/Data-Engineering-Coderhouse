@@ -86,3 +86,16 @@ def upsert_criptomonedas(cursor_db, conn):
     drop_staging = "DROP TABLE staging_criptomonedas;"
     cursor_db.execute(drop_staging)
     conn.commit()
+
+
+def avg_criptos(cursor_db, conn, pd):
+    # Se saca un promedio de las criptomonedas que se encuentran en la BD
+    average_query = """
+    SELECT nombre, avg(precio_unitario) as promedio_precio 
+    FROM criptomonedas
+    GROUP BY nombre;
+    """
+    # Lo hacemos mediante Pandas para ahorrarnos el paso a Dataframe
+    averages = pd.read_sql_query(average_query, conn, index_col=["nombre"])
+    
+    return averages
