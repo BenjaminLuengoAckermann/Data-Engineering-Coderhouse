@@ -53,7 +53,8 @@ Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los p
 > Para que el código corra de manera adecuada se precisa:
 > - Archivo de variables de entorno *.env* que se aloja en la carpeta [root](/)
 
-.
+
+.                         
 ├── dags                    
 ├── logs                 
 ├── plugins                
@@ -62,11 +63,11 @@ Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los p
 └── README.md
 > - Archivo de configuraciones *config.py* que se aloja en *plugins*
 
-.
-├── ...                     #
+.                          
+├── ...                       
 ├── plugins                 # Directorio
-│   ├── alertas.py          #
-│   ├── conexion_db.py      #
+│   ├── alertas.py                      
+│   ├── conexion_db.py         
 │   ├── test_utils.py       #
 │   └── **config.py**       # Archivo de configuración
 └── ...
