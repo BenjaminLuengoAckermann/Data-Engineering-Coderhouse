@@ -52,20 +52,22 @@ Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los p
 > [!IMPORTANT]
 > Para que el código corra de manera adecuada se precisa:
 > - Archivo de variables de entorno *.env* que se aloja en la carpeta [root](/)
+
 .
-├── dags
+├── dags                    
 ├── logs                 
 ├── plugins                
 ├── **.env**                # Archivo de variables de entorno
 ├── docker-compose.yaml                
 └── README.md
 > - Archivo de configuraciones *config.py* que se aloja en *plugins*
+
 .
-├── ...
+├── ...                     #
 ├── plugins                 # Directorio
-│   ├── alertas.py   
-│   ├── conexion_db.py
-│   ├── test_utils.py
+│   ├── alertas.py          #
+│   ├── conexion_db.py      #
+│   ├── test_utils.py       #
 │   └── **config.py**       # Archivo de configuración
 └── ...
 
