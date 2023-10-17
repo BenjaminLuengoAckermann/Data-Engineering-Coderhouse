@@ -51,8 +51,24 @@ Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los p
 
 > [!IMPORTANT]
 > Para que el código corra de manera adecuada se precisa:
-> - Archivo de configuraciones *config.py* que se aloja en [plugins](plugins/__init__.py)
 > - Archivo de variables de entorno *.env* que se aloja en la carpeta [root](/)
+.
+├── dags
+├── logs                 
+├── plugins                
+├── **.env**                # Archivo de variables de entorno
+├── docker-compose.yaml                
+└── README.md
+> - Archivo de configuraciones *config.py* que se aloja en *plugins*
+.
+├── ...
+├── plugins                 # Directorio
+│   ├── alertas.py   
+│   ├── conexion_db.py
+│   ├── test_utils.py
+│   └── **config.py**       # Archivo de configuración
+└── ...
+
 > Pueden solicitarme ambos archivos mediante Github para testear el código!
 > Esto se hace con el fin de mantener privadas las credenciales de la Base de Datos y servidor SMTP.
 
