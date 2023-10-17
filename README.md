@@ -47,5 +47,12 @@ Partiendo de esa base, se deben seguir los siguientes pasos para correr el progr
 
 ### :incoming_envelope: Envío de Alertas
 El envío de alertas se puede modificar cambiando los valores de treshold presentes en la función ```get_tresholds_for_top_10_crypto``` del *[Módulo Alertas](plugins/alertas.py)*. 
-Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los pasos anteriores y serán enviadas a los correos especificados como variables de entorno en el archivo *[docker-dompose](docker-compose.yaml)*.
+Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los pasos anteriores y serán enviadas a la lista de correos especificados como variable en el archivo de *configuración de Python*.
+
+> [!IMPORTANT]
+> Para que el código corra de manera adecuada se precisa:
+> - Archivo de configuraciones *config.py* que se aloja en [plugins](plugins/__init__.py)
+> - Archivo de variables de entorno *.env* que se aloja en la carpeta [root](/)
+> Pueden solicitarme ambos archivos mediante Github para testear el código!
+> Esto se hace con el fin de mantener privadas las credenciales de la Base de Datos y servidor SMTP.
 
