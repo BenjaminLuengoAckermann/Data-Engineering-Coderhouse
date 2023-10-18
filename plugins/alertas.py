@@ -10,9 +10,9 @@ def outliers(cursor_db, conn, pd):
 def get_tresholds_for_top_10_crypto(crypto):
     # Los valores de los tresholds (deben ser > 0) se pueden cambiar desde aquí permitiendo personalizar el envio de alertas
     dict = {
-        "btc": 20,
+        "btc": 2000,
         "bnb": 3,
-        "eth": 2,
+        "eth": 2000,
         "luna": 3,
         "trx": 2,
         "cake": 2,
