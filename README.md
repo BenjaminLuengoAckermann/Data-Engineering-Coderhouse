@@ -17,7 +17,7 @@
 A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla tendria por columnas:
 >
 > - nombre *(unique) (varchar(256))*
-> - fecha *(date)*
+> - fecha *(date)* [^3]
 > - precio_unitario *(decimal(38, 10))* [^1]
 > - precio_relativo *(numeric(38, 10))* [^2]  
  
@@ -25,7 +25,7 @@ A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla ten
 
 [^1]: Cuanto vale en dólares una unidad de la criptomoneda **(e.g: 1 BTC = 26010 USD)**
 [^2]: Cuanto vale en la criptomoneda correspondiente una unidad de dolar **(e.g: 1 USD = 0.00003845 BTC)** 
-
+[^3]: No se hace uso de un campo que tenga la fecha de inserción del registro ya que al correr el script de forma diaria y traer en todos los casos la información del día, la fecha de inserción coincide a la de los datos.
 
 ### :golfing: ¿Como correr el container?
 Para correr el container, en primer lugar, debemos tener instalado:
