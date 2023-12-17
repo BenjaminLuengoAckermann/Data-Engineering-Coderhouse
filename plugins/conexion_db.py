@@ -3,11 +3,11 @@ import config
 
 
 def conectar():
-    host = config.host
-    port = config.port
-    dbname = config.dbname
-    user = config.user
-    password = config.password
+    host = config.HOST
+    port = config.PORT
+    dbname = config.DBNAME
+    user = config.USER
+    password = config.PASSWORD
 
     # Conectarse al cluster de Redshift
     try: 
@@ -50,6 +50,13 @@ def crear_tabla_staging(cursor_db, conn):
     conn.commit()
 
 
+def eliminar_tabla_staging(cursor_db, conn):
+    # Creamos tabla de staging
+    staging_table = "DROP TABLE IF EXISTS staging_criptomonedas;"
+    cursor_db.execute(staging_table)
+    conn.commit()
+
+
 def insertar_registro(cursor_db, conn, nombre, fecha, precio_unitario, precio_relativo):
     # Se insertan los registros en la tabla temporal o de staging
     insert_query = '''
@@ -79,3 +86,16 @@ def upsert_criptomonedas(cursor_db, conn):
     drop_staging = "DROP TABLE staging_criptomonedas;"
     cursor_db.execute(drop_staging)
     conn.commit()
+
+
+def avg_criptos(cursor_db, conn, pd):
+    # Se saca un promedio de las criptomonedas que se encuentran en la BD
+    average_query = """
+    SELECT nombre, avg(precio_unitario) as promedio_precio 
+    FROM criptomonedas
+    GROUP BY nombre;
+    """
+    # Lo hacemos mediante Pandas para ahorrarnos el paso a Dataframe
+    averages = pd.read_sql_query(average_query, conn, index_col=["nombre"])
+    
+    return averages

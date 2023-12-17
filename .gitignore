@@ -1,4 +1,12 @@
 config.py
+logs/*
+.env
+
+#Mantener las carpetas vacias
+!logs/.gitkeep
+!plugins/.gitkeep
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

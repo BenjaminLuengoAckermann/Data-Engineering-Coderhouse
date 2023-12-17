@@ -9,13 +9,15 @@
 
     Se puede pensar este script como uno que se corre diariamente dentro de una organización a fin de obtener las cotizaciones y almacenarlas con el objetivo de lograr consultas que agreguen valor a la compañia en una linea  temporal histórica desde el primer día de puesta en marcha del script hasta la actualidad.
 
+
 ### :globe_with_meridians: Repositorio API: https://github.com/fawazahmed0/currency-api#readme
+
 
 ### :floppy_disk: Base de Datos
 A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla tendria por columnas:
 >
 > - nombre *(unique) (varchar(256))*
-> - fecha *(date)*
+> - fecha *(date)* [^3]
 > - precio_unitario *(decimal(38, 10))* [^1]
 > - precio_relativo *(numeric(38, 10))* [^2]  
  
@@ -23,3 +25,46 @@ A nivel de persistencia teniendo en cuenta que en una BD Relacional la tabla ten
 
 [^1]: Cuanto vale en dólares una unidad de la criptomoneda **(e.g: 1 BTC = 26010 USD)**
 [^2]: Cuanto vale en la criptomoneda correspondiente una unidad de dolar **(e.g: 1 USD = 0.00003845 BTC)** 
+[^3]: No se hace uso de un campo que tenga la fecha de inserción del registro ya que al correr el script de forma diaria y traer en todos los casos la información del día, la fecha de inserción coincide a la de los datos.
+
+### :golfing: ¿Como correr el container?
+Para correr el container, en primer lugar, debemos tener instalado:
+
+> - *Docker*
+> - *Docker-compose*
+
+Partiendo de esa base, se deben seguir los siguientes pasos para correr el programa:
+
+1. Descargar en modo comprimido o clonar el repositorio
+2. Abrir una terminal dentro del proyecto (*Data-Engineering-Coderhouse*)
+3. En la terminal, usar el comando ```docker-compose up airflow-init```
+4. Ejecutar el comando ```docker-compose up```. Esto levantará el cliente web de Airflow donde podremos ver la ejecución de la tarea
+5. Dentro del navegador ir al [localhost](http://localhost:8080) e introducir las siguientes credenciales:
+    - *Username:* Benjamin
+    - *Password*: Luengo
+6. Ya en el cliente de Airflow se puede ver que el DAG estará listado y corriendo una vez por día
+
+
+### :incoming_envelope: Envío de Alertas
+El envío de alertas se puede modificar cambiando los valores de treshold presentes en la función ```get_tresholds_for_top_10_crypto``` del *[Módulo Alertas](plugins/alertas.py)*. 
+Estas alertas corresponden a las criptomonedas elegidas arbitrariamente en los pasos anteriores y serán enviadas a la lista de correos especificados como variable en el archivo de *configuración de Python*.
+
+> [!IMPORTANT]
+> Para que el código corra de manera adecuada se precisa:
+> - Archivo de variables de entorno *.env* que se aloja en la carpeta root
+> - Archivo de configuraciones *config.py* que se aloja en *plugins*
+>```python
+>├── dags                    
+>├── logs                 
+>├── plugins
+>│   ├── alertas.py                      
+>│   ├── conexion_db.py         
+>│   ├── test_utils.py    
+>│   └── config.py      # Archivo de configuración                
+>├── docker-compose.yaml 
+>├── .env               # Archivo de variables de entorno 
+>└── README.md
+>```
+> Pueden solicitarme ambos archivos mediante Github para testear el código!<br>
+> Esto se hace con el fin de mantener privadas las credenciales de la Base de Datos y servidor SMTP.
+
